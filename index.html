@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fan site dedicado a The Last of Us — Part I, Part II, infectados, personagens, facções e a trilha sonora de Gustavo Santaolalla.">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>The Last of Us — Fan Site</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== CURSOR PERSONALIZADO ========== -->
+  <div class="cursor-mira" id="cursorMira" aria-hidden="true">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Linhas da mira -->
+      <line x1="18" y1="2"  x2="18" y2="10" stroke="#c8a45a" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="18" y1="26" x2="18" y2="34" stroke="#c8a45a" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="2"  y1="18" x2="10" y2="18" stroke="#c8a45a" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="26" y1="18" x2="34" y2="18" stroke="#c8a45a" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Círculo externo -->
+      <circle cx="18" cy="18" r="10" stroke="#c8a45a" stroke-width="1.2" opacity="0.7"/>
+      <!-- Círculo interno pequeno -->
+      <circle cx="18" cy="18" r="2.5" stroke="#c8a45a" stroke-width="1.2"/>
+      <!-- Marcações diagonais nos cantos -->
+      <line x1="10" y1="10" x2="12.5" y2="12.5" stroke="#c8a45a" stroke-width="1" opacity="0.5"/>
+      <line x1="26" y1="10" x2="23.5" y2="12.5" stroke="#c8a45a" stroke-width="1" opacity="0.5"/>
+      <line x1="10" y1="26" x2="12.5" y2="23.5" stroke="#c8a45a" stroke-width="1" opacity="0.5"/>
+      <line x1="26" y1="26" x2="23.5" y2="23.5" stroke="#c8a45a" stroke-width="1" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="cursor-ponto" id="cursorPonto" aria-hidden="true"></div>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+    <div class="loading-conteudo">
+      <div class="loading-simbolo">
+        <i class="fa-solid fa-biohazard"></i>
+      </div>
+      <div class="loading-titulo">THE LAST OF US</div>
+      <div class="loading-barra-wrap">
+        <div class="loading-barra" id="loadingBarra"></div>
+      </div>
+      <div class="loading-texto" id="loadingTexto">Inicializando...</div>
+    </div>
+  </div>
+
+  <!-- ========== TEXTURAS GLOBAIS ========== -->
+  <div class="grao-global" aria-hidden="true"></div>
+  <div class="esporos" id="esporos" aria-hidden="true"></div>
+  <div class="linha-micelio esq" aria-hidden="true"></div>
+  <div class="linha-micelio dir" aria-hidden="true"></div>
+
+  <!-- ========== NAVEGAÇÃO ========== -->
+  <header>
+    <nav>
+      <a href="#" class="logo"><i class="fa-solid fa-biohazard" aria-hidden="true"></i> TLOU</a>
+      <button class="btn-tema" id="btnTema" aria-label="Alternar tema" title="Alternar tema">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuNav">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul id="menuNav">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#personagens">Personagens</a></li>
+        <li><a href="#infectados">Infectados</a></li>
+        <li><a href="#faccoes">Facções</a></li>
+        <li><a href="#jornada">Jornada</a></li>
+        <li><a href="#trilha">Trilha</a></li>
+        <li>
+          <button class="nav-mais-btn" id="navMaisBtn" aria-label="Mais seções" aria-expanded="false">
+            Mais <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Painel lateral -->
+      <div class="nav-lateral" id="navLateral" aria-hidden="true">
+        <div class="nav-lateral-header">
+          <span>Explorar</span>
+          <button class="nav-lateral-fechar" id="navLateralFechar" aria-label="Fechar menu lateral">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <nav class="nav-lateral-links">
+          <a href="#comparativo" class="nav-lateral-link">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <div>
+              <strong>Comparativo</strong>
+              <small>Part I vs Part II frente a frente</small>
+            </div>
+          </a>
+          <a href="#mapa" class="nav-lateral-link">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div>
+              <strong>Mapa da Jornada</strong>
+              <small>A rota completa dos dois jogos</small>
+            </div>
+          </a>
+          <a href="#serie" class="nav-lateral-link">
+            <i class="fa-solid fa-tv"></i>
+            <div>
+              <strong>A Série Completa</strong>
+              <small>Jogos, DLCs e série HBO</small>
+            </div>
+          </a>
+          <a href="#easter-eggs" class="nav-lateral-link">
+            <i class="fa-solid fa-egg"></i>
+            <div>
+              <strong>Easter Eggs</strong>
+              <small>Segredos escondidos pela Naughty Dog</small>
+            </div>
+          </a>
+          <a href="#galeria" class="nav-lateral-link">
+            <i class="fa-solid fa-images"></i>
+            <div>
+              <strong>Galeria de Fãs</strong>
+              <small>Compartilhe seus momentos favoritos</small>
+            </div>
+          </a>
+          <a href="#quiz" class="nav-lateral-link">
+            <i class="fa-solid fa-circle-question"></i>
+            <div>
+              <strong>Quiz</strong>
+              <small>Qual personagem você seria?</small>
+            </div>
+          </a>
+        </nav>
+      </div>
+      <div class="nav-lateral-overlay" id="navLateralOverlay"></div>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="images/hero.jpg" alt="" class="hero-bg-img" fetchpriority="high">
+    </div>
+    <div class="hero-content">
+      <p class="hero-pre">NAUGHTY DOG · 2013 · 2020</p>
+      <h1>THE LAST<br><span class="hero-h1-of">OF US</span></h1>
+      <p class="subtitulo">Em um mundo destruído pelo fungo, sobreviver é apenas o começo.</p>
+      <a href="#numeros" class="btn">Explorar</a>
+    </div>
+    <div class="hero-scroll"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+  </section>
+
+  <!-- ========== EM NÚMEROS ========== -->
+  <section id="numeros" class="secao secao-numeros">
+    <div class="secao-inner">
+      <p class="secao-pre">A franquia em números</p>
+      <h2>Duas décadas de impacto</h2>
+      <p class="secao-sub">Desde 2013, The Last of Us se tornou uma das franquias mais aclamadas e premiadas da história dos videogames</p>
+
+      <div class="numeros-grid">
+        <div class="numero-card">
+          <div class="numero-jogo">Part I</div>
+          <div class="numero-valores">
+            <div><span>200+</span><small>Prêmios GOTY</small></div>
+            <div><span>29M</span><small>Cópias vendidas</small></div>
+            <div><span>95</span><small>Metacritic</small></div>
+          </div>
+          <p class="numero-ano">2013 · PS3</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="numero-jogo">Part II</div>
+          <div class="numero-valores">
+            <div><span>300+</span><small>Prêmios GOTY</small></div>
+            <div><span>10M</span><small>Cópias vendidas</small></div>
+            <div><span>93</span><small>Metacritic</small></div>
+          </div>
+          <p class="numero-ano">2020 · PS4</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOBRE ========== -->
+  <section id="sobre" class="secao">
+    <div class="secao-inner">
+      <h2>Sobre os Jogos</h2>
+
+      <div class="jogos-tabs">
+        <button class="jogo-tab ativo" data-jogo="1">Part I — 2013</button>
+        <button class="jogo-tab" data-jogo="2">Part II — 2020</button>
+      </div>
+
+      <!-- PART I -->
+      <div class="jogo-conteudo ativo" id="jogo-1">
+        <div class="sobre-grid">
+          <div class="sobre-texto">
+            <p>
+              <strong>The Last of Us</strong> é um dos jogos mais aclamados de todos os tempos,
+              desenvolvido pela <em>Naughty Dog</em> e lançado em junho de 2013 para PlayStation 3.
+            </p>
+            <p>
+              A história se passa em 2033 — vinte anos após um fungo mutante do gênero
+              <em>Ophiocordyceps</em> devastar a civilização humana. O fungo infecta e controla o
+              sistema nervoso central, transformando humanos em criaturas violentas e irreconhecíveis.
+            </p>
+            <p>
+              O governo colapsou. As cidades foram abandonadas. Sobreviventes vivem em
+              zonas de quarentena militarizadas ou em grupos armados pelo interior dos
+              Estados Unidos. Cada decisão é uma questão de vida ou morte.
+            </p>
+            <p>
+              É nesse cenário que conhecemos <strong>Joel Miller</strong>, um contrabandista
+              endurecido por anos de sobrevivência brutal, e <strong>Ellie Williams</strong>,
+              uma adolescente imune ao fungo que carrega um segredo capaz de mudar o destino da humanidade.
+              O que começa como uma missão de entrega se transforma em uma jornada que redefine o amor,
+              a perda e o que significa ser humano.
+            </p>
+            <p>
+              Com narrativa cinematográfica, atuações excepcionais e um mundo pós-apocalíptico
+              assustadoramente crível, o jogo conquistou mais de <strong>200 prêmios de Game of the Year</strong>
+              e é amplamente considerado uma das maiores obras da história dos videogames.
+            </p>
+          </div>
+          <div class="sobre-ficha">
+            <div class="ficha-card">
+              <h4>Ficha Técnica — Part I</h4>
+              <ul>
+                <li><span>Desenvolvedora</span>Naughty Dog</li>
+                <li><span>Distribuidora</span>Sony Interactive</li>
+                <li><span>Lançamento</span>14 de Junho, 2013</li>
+                <li><span>Gênero</span>Ação / Survival Horror</li>
+                <li><span>Plataformas</span>PS3 · PS4 · PS5 · PC</li>
+                <li><span>Direção</span>Neil Druckmann</li>
+                <li><span>Trilha Sonora</span>Gustavo Santaolalla</li>
+                <li><span>Metacritic</span>95/100</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART II -->
+      <div class="jogo-conteudo" id="jogo-2">
+        <div class="sobre-grid">
+          <div class="sobre-texto">
+            <p>
+              <strong>The Last of Us Part II</strong>, lançado em junho de 2020, é a sequência direta
+              do primeiro jogo e uma das experiências mais ousadas e divisivas da história dos games.
+            </p>
+            <p>
+              A história se passa cinco anos depois dos eventos de Salt Lake City.
+              <strong>Ellie</strong>, agora com 19 anos, vive em Jackson, Wyoming, com uma comunidade
+              estável. Mas quando um evento traumático abala sua vida, ela parte em uma jornada de
+              vingança que a leva até Seattle — uma cidade dominada por dois grupos rivais em guerra:
+              os <em>WLF (Washington Liberation Front)</em> e os <em>Seraphitas</em>.
+            </p>
+            <p>
+              O que torna o Part II extraordinário é sua coragem narrativa: o jogo obriga o jogador
+              a encarar a história de múltiplos lados, incluindo o ponto de vista de <strong>Abby</strong>,
+              uma personagem que começa como antagonista e se torna tão complexa quanto a própria Ellie.
+            </p>
+            <p>
+              Tecnicamente, é um dos jogos mais impressionantes já feitos — com animações faciais
+              sem precedentes, combate brutal e realista, e um level design elaborado. Superou o
+              primeiro jogo em número de prêmios GOTY, acumulando mais de <strong>300 premiações</strong>,
+              incluindo o título da The Game Awards 2020.
+            </p>
+            <p>
+              Temas de ciclo de violência, empatia forçada, trauma e redenção fazem do Part II
+              uma obra que permanece na mente muito depois de terminar — seja amada ou contestada.
+            </p>
+          </div>
+          <div class="sobre-ficha">
+            <div class="ficha-card">
+              <h4>Ficha Técnica — Part II</h4>
+              <ul>
+                <li><span>Desenvolvedora</span>Naughty Dog</li>
+                <li><span>Distribuidora</span>Sony Interactive</li>
+                <li><span>Lançamento</span>19 de Junho, 2020</li>
+                <li><span>Gênero</span>Ação / Survival Horror</li>
+                <li><span>Plataformas</span>PS4 · PS5 · PC</li>
+                <li><span>Direção</span>Neil Druckmann · Halley Gross</li>
+                <li><span>Trilha Sonora</span>Gustavo Santaolalla · Mac Quayle</li>
+                <li><span>Metacritic</span>93/100</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== COMPARATIVO ========== -->
+  <section id="comparativo" class="secao secao-escura">
+    <div class="secao-inner">
+      <p class="secao-pre">Os dois jogos frente a frente</p>
+      <h2>Comparativo</h2>
+      <p class="secao-sub">Dois jogos, duas perspectivas, um universo — veja como eles se comparam em cada aspecto</p>
+
+      <div class="comparativo-grid">
+
+        <div class="comparativo-header">
+          <div class="comparativo-aspecto"></div>
+          <div class="comparativo-jogo comparativo-jogo-1">
+            <span class="comp-titulo">Part I</span>
+            <span class="comp-ano">2013</span>
+          </div>
+          <div class="comparativo-jogo comparativo-jogo-2">
+            <span class="comp-titulo">Part II</span>
+            <span class="comp-ano">2020</span>
+          </div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-user"></i> Protagonista</div>
+          <div class="comparativo-val">Joel &amp; Ellie</div>
+          <div class="comparativo-val">Ellie &amp; Abby</div>
+        </div>
+
+        <div class="comparativo-row comparativo-row-alt">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-map-location-dot"></i> Cenário</div>
+          <div class="comparativo-val">Boston → Salt Lake City</div>
+          <div class="comparativo-val">Jackson → Santa Bárbara</div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-heart"></i> Tom narrativo</div>
+          <div class="comparativo-val">Esperança e amor paternal</div>
+          <div class="comparativo-val">Vingança e ciclo de violência</div>
+        </div>
+
+        <div class="comparativo-row comparativo-row-alt">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-clock"></i> Duração média</div>
+          <div class="comparativo-val">~15 horas</div>
+          <div class="comparativo-val">~25 horas</div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-biohazard"></i> Infectados novos</div>
+          <div class="comparativo-val">Runner, Stalker, Clicker, Bloater</div>
+          <div class="comparativo-val">Shambler, Rat King</div>
+        </div>
+
+        <div class="comparativo-row comparativo-row-alt">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-gun"></i> Mecânica nova</div>
+          <div class="comparativo-val">Crafting básico, furtividade</div>
+          <div class="comparativo-val">Esquiva, corda, nado, cachorro</div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-users"></i> Facções principais</div>
+          <div class="comparativo-val">FEDRA, Vaga-lumes, Caçadores</div>
+          <div class="comparativo-val">WLF, Seraphitas, Rattlers</div>
+        </div>
+
+        <div class="comparativo-row comparativo-row-alt">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-star"></i> Metacritic</div>
+          <div class="comparativo-val comp-destaque">95 / 100</div>
+          <div class="comparativo-val comp-destaque">93 / 100</div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-trophy"></i> Prêmios GOTY</div>
+          <div class="comparativo-val comp-destaque">200+</div>
+          <div class="comparativo-val comp-destaque">300+</div>
+        </div>
+
+        <div class="comparativo-row comparativo-row-alt">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-music"></i> Compositor</div>
+          <div class="comparativo-val">Gustavo Santaolalla</div>
+          <div class="comparativo-val">Santaolalla + Mac Quayle</div>
+        </div>
+
+        <div class="comparativo-row">
+          <div class="comparativo-aspecto"><i class="fa-solid fa-palette"></i> Estação dominante</div>
+          <div class="comparativo-val">Outono / Inverno</div>
+          <div class="comparativo-val">Verão / Inverno</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PERSONAGENS ========== -->
+  <section id="personagens" class="secao secao-escura">
+    <div class="secao-inner">
+      <h2>Personagens</h2>
+      <p class="secao-sub">As pessoas que tornam essa jornada inesquecível — nos dois jogos</p>
+
+      <div class="carrossel-wrap">
+        <button class="carrossel-btn prev" id="personagemPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="carrossel-viewport">
+          <div class="carrossel-track" id="personagemTrack">
+
+        <!-- JOEL -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Joel_infobox.webp" alt="Joel Miller" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>J</span></div>
+            <div class="foto-overlay">Sobrevivente · Texas</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Joel Miller</h3>
+            <div class="tags-row">
+              <span class="tag">Protagonista — Part I</span>
+              <span class="tag tag-cinza">Contrabandista</span>
+            </div>
+            <p>
+              Ex-carpinteiro de Austin, Texas. Joel perdeu tudo no início do surto e
+              passou duas décadas se tornando alguém implacável e calculista.
+              Trabalha como contrabandista na Zona de Quarentena de Boston com Tess,
+              trocando suprimentos ilegais por favores — e sobrevivendo a qualquer custo.
+            </p>
+            <p>
+              Por dentro, carrega uma dor que nunca cicatrizou. A missão de escoltar Ellie
+              vai despertar algo que ele jurou nunca mais sentir. Sua decisão final em Salt Lake City
+              define o coração moral de toda a franquia.
+            </p>
+            <div class="personagem-atributos">
+              <div><strong>Jogo</strong><span>Part I · Part II</span></div>
+              <div><strong>Habilidade</strong><span>Combate e furtividade</span></div>
+              <div><strong>Fraqueza</strong><span>O passado</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELLIE -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/ellie.webp" alt="Ellie Williams" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>E</span></div>
+            <div class="foto-overlay">Imune · Boston → Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Ellie Williams</h3>
+            <div class="tags-row">
+              <span class="tag">Protagonista — Part I &amp; II</span>
+              <span class="tag tag-verde">Imune</span>
+            </div>
+            <p>
+              Criada no orfanato militar FEDRA em Boston, Ellie nunca conheceu o mundo
+              antes do surto. Aos 14 anos, esconde um segredo extraordinário:
+              é <strong>imune ao fungo Cordyceps</strong>. Sarcástica, corajosa e com um humor
+              peculiar, usa piadas horríveis para lidar com um mundo horrível.
+            </p>
+            <p>
+              No Part II, Ellie tem 19 anos e vive em Jackson. Quando um trauma irreparável
+              abala sua vida, ela parte em uma jornada de vingança por Seattle que irá
+              testá-la até os limites da humanidade — e fazer o jogador questionar tudo.
+            </p>
+            <div class="personagem-atributos">
+              <div><strong>Jogo</strong><span>Part I · Part II</span></div>
+              <div><strong>Habilidade</strong><span>Improviso e agilidade</span></div>
+              <div><strong>Traço</strong><span>Resiliência inabalável</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABBY -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/abby.webp" alt="Abby Anderson" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>A</span></div>
+            <div class="foto-overlay">WLF · Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Abby Anderson</h3>
+            <div class="tags-row">
+              <span class="tag">Protagonista — Part II</span>
+              <span class="tag tag-cinza">WLF</span>
+            </div>
+            <p>
+              Soldado do Washington Liberation Front, Abby é fisicamente imponente, tecnicamente
+              habilidosa e carrega suas próprias cicatrizes e motivações. Filha de um médico
+              dos Vaga-lumes, ela cruzou o país inteiro em busca de um objetivo pessoal.
+            </p>
+            <p>
+              O jogo dedica metade de sua duração ao ponto de vista de Abby — uma decisão
+              narrativa ousada que força o jogador a desenvolver empatia por quem começou como
+              antagonista. É o coração divisivo e genial do Part II.
+            </p>
+            <div class="personagem-atributos">
+              <div><strong>Jogo</strong><span>Part II</span></div>
+              <div><strong>Aliança</strong><span>WLF</span></div>
+              <div><strong>Traço</strong><span>Força e determinação</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOMMY -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/tommy.webp" alt="Tommy Miller" class="personagem-foto" style="object-position: 35% 8%;">
+            <div class="foto-placeholder" hidden><span>T</span></div>
+            <div class="foto-overlay">Sobrevivente · Wyoming</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Tommy Miller</h3>
+            <div class="tags-row">
+              <span class="tag tag-azul">Part I &amp; II</span>
+              <span class="tag tag-cinza">Ex-Vaga-lume</span>
+            </div>
+            <p>
+              Irmão mais novo de Joel, Tommy foi um Vaga-lume antes de se estabelecer
+              em Wyoming com sua esposa Maria. Conseguiu construir uma pequena comunidade
+              funcional em Jackson — uma das poucas esperanças reais de civilização.
+            </p>
+            <p>
+              No Part II, Tommy tem um papel ativo na jornada para Seattle, sendo consumido
+              por seu próprio desejo de vingança. Mais otimista que Joel, mas igualmente
+              capaz de ser tomado pela raiva quando o que ama é ameaçado.
+            </p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Jackson, Wyoming</span></div>
+              <div><strong>Ex-aliança</strong><span>Vaga-lumes</span></div>
+              <div><strong>Traço</strong><span>Otimismo e proteção</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DINA -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/dina.webp" alt="Dina" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>D</span></div>
+            <div class="foto-overlay">Sobrevivente · Jackson</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Dina</h3>
+            <div class="tags-row">
+              <span class="tag tag-verde">Aliada</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Companheira de Ellie em Jackson e parceira na jornada para Seattle. Inteligente, direta e com senso de humor afiado, Dina representa a âncora emocional de Ellie no Part II — e o que ela tem a perder com a vingança.</p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Jackson → Seattle</span></div>
+              <div><strong>Traço</strong><span>Lealdade e pragmatismo</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JESSE -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Jesse_infobox.webp" alt="Jesse" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>J</span></div>
+            <div class="foto-overlay">Patrulheiro · Jackson</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Jesse</h3>
+            <div class="tags-row">
+              <span class="tag tag-azul">Aliado</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Patrulheiro de confiança de Jackson e amigo próximo de Ellie. Jesse vai para Seattle para trazer Ellie e Dina de volta, demonstrando a lealdade silenciosa que define seu personagem.</p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Jackson → Seattle</span></div>
+              <div><strong>Traço</strong><span>Calma e responsabilidade</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OWEN -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/owen.webp" alt="Owen" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>O</span></div>
+            <div class="foto-overlay">WLF · Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Owen Moore</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">WLF</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Amigo próximo e ex-namorado de Abby, Owen questiona a violência do WLF e sonha em levar sua família para o sul, onde dizem que há esperança. Sua busca por algo além da guerra o coloca em caminho de colisão com todos.</p>
+            <div class="personagem-atributos">
+              <div><strong>Aliança</strong><span>WLF</span></div>
+              <div><strong>Traço</strong><span>Idealismo e conflito interno</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TESS -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Tess_infobox.webp" alt="Tess" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>T</span></div>
+            <div class="foto-overlay">Contrabandista · Boston</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Tess</h3>
+            <div class="tags-row">
+              <span class="tag tag-azul">Part I</span>
+              <span class="tag tag-cinza">Parceira de Joel</span>
+            </div>
+            <p>Parceira de Joel há anos no contrabando de Boston, Tess é pragmática, dura e absolutamente leal. Fecha o acordo com os Vaga-lumes e convence Joel a escoltar Ellie para além dos muros.</p>
+            <p>Seu sacrifício precoce é o catalisador da jornada inteira — Tess vê em Ellie a chance de redenção que ela mesma nunca terá.</p>
+            <div class="personagem-atributos">
+              <div><strong>Papel</strong><span>Contrabandista</span></div>
+              <div><strong>Aliança</strong><span>Independente</span></div>
+              <div><strong>Traço</strong><span>Lealdade absoluta</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARLENE -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Marlene_infobox.webp" alt="Marlene" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>M</span></div>
+            <div class="foto-overlay">Líder · Vaga-lumes</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Marlene</h3>
+            <div class="tags-row">
+              <span class="tag tag-vermelho">Vaga-lumes</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Líder dos Vaga-lumes e velha amiga de Anna, a mãe de Ellie. Foi ela quem prometeu cuidar de Ellie e quem dedica tudo à busca por uma cura. Sua missão é a razão de toda a jornada existir.</p>
+            <p>Em Salt Lake City, sua decisão sobre o destino de Ellie coloca em xeque o coração moral da franquia inteira — e termina com Joel tomando a escolha por todos.</p>
+            <div class="personagem-atributos">
+              <div><strong>Aliança</strong><span>Vaga-lumes</span></div>
+              <div><strong>Base final</strong><span>Salt Lake City</span></div>
+              <div><strong>Traço</strong><span>Determinação fanática</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEV -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Lev_infobox.webp" alt="Lev" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>L</span></div>
+            <div class="foto-overlay">Ex-Seraphite · Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Lev</h3>
+            <div class="tags-row">
+              <span class="tag tag-verde">Aliado</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Adolescente trans que fugiu dos Seraphites depois de raspar a cabeça em recusa a um casamento forçado. Salvo por Abby, vira o centro emocional de toda a metade dela no Part II.</p>
+            <p>Sua coragem silenciosa e sua bondade num mundo brutal são o motivo pelo qual Abby decide deixar Ellie viver no final.</p>
+            <div class="personagem-atributos">
+              <div><strong>Origem</strong><span>Seraphites</span></div>
+              <div><strong>Aliada</strong><span>Abby</span></div>
+              <div><strong>Traço</strong><span>Convicção e bondade</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RILEY -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Riley_infobox.webp" alt="Riley Abel" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>R</span></div>
+            <div class="foto-overlay">Vaga-lume · Boston</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Riley Abel</h3>
+            <div class="tags-row">
+              <span class="tag tag-vermelho">Vaga-lumes</span>
+              <span class="tag tag-cinza">Left Behind</span>
+            </div>
+            <p>Melhor amiga de Ellie no orfanato da FEDRA em Boston, Riley se junta aos Vaga-lumes e reaparece para uma última noite no shopping abandonado — o cenário central do DLC <em>Left Behind</em>.</p>
+            <p>Foi com Riley que Ellie descobriu o primeiro amor — e foi naquela noite que as duas foram mordidas. Só Ellie sobreviveu.</p>
+            <div class="personagem-atributos">
+              <div><strong>Aliança</strong><span>Vaga-lumes</span></div>
+              <div><strong>Significado</strong><span>Primeiro amor de Ellie</span></div>
+              <div><strong>Traço</strong><span>Rebeldia e coragem</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YARA -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Yara_infobox.webp" alt="Yara" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>Y</span></div>
+            <div class="foto-overlay">Ex-Seraphite · Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Yara</h3>
+            <div class="tags-row">
+              <span class="tag tag-verde">Aliada</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Irmã mais velha de Lev, Yara abandona os Seraphites para protegê-lo da execução. Encontra Abby ferida e forja uma aliança improvável que muda toda a história do Part II.</p>
+            <p>Sua relação fraterna com Lev é uma das mais comoventes do jogo — uma rocha de afeto verdadeiro em meio à guerra.</p>
+            <div class="personagem-atributos">
+              <div><strong>Origem</strong><span>Seraphites</span></div>
+              <div><strong>Família</strong><span>Irmã de Lev</span></div>
+              <div><strong>Traço</strong><span>Proteção fraternal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARIA -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Maria_infobox.webp" alt="Maria Miller" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>M</span></div>
+            <div class="foto-overlay">Líder · Jackson</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Maria Miller</h3>
+            <div class="tags-row">
+              <span class="tag tag-azul">Aliada</span>
+              <span class="tag tag-cinza">Part I &amp; II</span>
+            </div>
+            <p>Esposa de Tommy e uma das líderes da comunidade de Jackson, Wyoming. Ex-promotora pública, Maria mantém a ordem da última grande sociedade funcional que sobrou nos EUA.</p>
+            <p>É ela quem recebe Joel e Ellie em Jackson e, anos depois, quem suporta Tommy quando a tragédia bate à porta no Part II.</p>
+            <div class="personagem-atributos">
+              <div><strong>Cargo</strong><span>Líder de Jackson</span></div>
+              <div><strong>Família</strong><span>Esposa de Tommy</span></div>
+              <div><strong>Traço</strong><span>Liderança firme</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HENRY -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Henry_infobox.webp" alt="Henry Burrell" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>H</span></div>
+            <div class="foto-overlay">Sobrevivente · Pittsburgh</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Henry Burrell</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">Aliado temporário</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Sobrevivente de Pittsburgh que protege seu irmão mais novo Sam a qualquer custo. Forma uma aliança frágil com Joel e Ellie para escapar da cidade dominada por caçadores.</p>
+            <p>Seu desfecho trágico é um dos primeiros golpes emocionais do jogo — uma lembrança brutal de que nenhum vínculo é seguro nesse mundo.</p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Pittsburgh, PA</span></div>
+              <div><strong>Família</strong><span>Irmão de Sam</span></div>
+              <div><strong>Traço</strong><span>Protetor desesperado</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAM -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Sam_infobox.webp" alt="Sam Burrell" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>S</span></div>
+            <div class="foto-overlay">Sobrevivente · Pittsburgh</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Sam Burrell</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">Criança</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Irmão mais novo de Henry. Tem mais ou menos a idade da Ellie e oferece uma rara amizade infantil em meio ao caos da Pittsburgh tomada por caçadores e infectados.</p>
+            <p>Sua infecção secreta e a noite seguinte são uma das cenas mais devastadoras do jogo — e ensinam à Ellie que ser imune não significa estar a salvo da perda.</p>
+            <div class="personagem-atributos">
+              <div><strong>Idade</strong><span>~13 anos</span></div>
+              <div><strong>Família</strong><span>Irmão de Henry</span></div>
+              <div><strong>Traço</strong><span>Inocência roubada</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BILL -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_Bill_infobox.webp" alt="Bill" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>B</span></div>
+            <div class="foto-overlay">Sobrevivente · Lincoln, MA</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Bill</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">Aliado relutante</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Sobrevivente paranoico e genial que armadilhou uma cidade inteira para viver sozinho. Devia um favor a Joel e ajuda a consertar um carro para a jornada continuar.</p>
+            <p>Durão e antissocial por fora, mas guarda em silêncio um luto que ele mesmo não quer encarar. Um dos personagens mais inesperadamente comoventes do Part I.</p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Lincoln, Massachusetts</span></div>
+              <div><strong>Especialidade</strong><span>Armadilhas</span></div>
+              <div><strong>Traço</strong><span>Autossuficiência extrema</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANNY -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Manny_infobox.png" alt="Manny Alvarez" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>M</span></div>
+            <div class="foto-overlay">WLF · Seattle</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Manny Alvarez</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">WLF</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Soldado de elite do WLF e melhor amigo de Abby. Carismático, brincalhão e absolutamente brutal em combate. Acredita firmemente na causa do WLF — mesmo quando ela vacila.</p>
+            <p>Sua amizade com Abby é uma das poucas constantes na vida dela em Seattle — e o motivo de boa parte da tensão moral do grupo.</p>
+            <div class="personagem-atributos">
+              <div><strong>Aliança</strong><span>WLF</span></div>
+              <div><strong>Origem</strong><span>Mexicano-americano</span></div>
+              <div><strong>Traço</strong><span>Lealdade e violência</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEL -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_II_Mel_infobox.webp" alt="Mel" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>M</span></div>
+            <div class="foto-overlay">Médica · WLF</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Mel</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">WLF</span>
+              <span class="tag tag-cinza">Part II</span>
+            </div>
+            <p>Médica do WLF, grávida, ex-namorada do Owen. Inteligente e direta, vive em conflito permanente com Abby pelo passado romântico com Owen — e por suas próprias convicções sobre a violência da facção.</p>
+            <p>Sua trajetória é um dos momentos em que o Part II expõe quão pessoal e doloroso é cada lado do ciclo de vingança.</p>
+            <div class="personagem-atributos">
+              <div><strong>Profissão</strong><span>Médica</span></div>
+              <div><strong>Aliança</strong><span>WLF</span></div>
+              <div><strong>Traço</strong><span>Inteligência cortante</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SARAH -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Sarah_Part_I_infobox.webp" alt="Sarah Miller" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>S</span></div>
+            <div class="foto-overlay">Filha de Joel · Texas</div>
+          </div>
+          <div class="personagem-info">
+            <h3>Sarah Miller</h3>
+            <div class="tags-row">
+              <span class="tag tag-cinza">Prólogo</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Filha de 12 anos do Joel. Doce, esperta e protetora — Sarah é o coração que Joel perde nas primeiras horas do surto, em Austin, Texas.</p>
+            <p>O prólogo de TLOU continua sendo uma das aberturas mais devastadoras da história dos videogames. Tudo que Joel se torna durante 20 anos começa aqui.</p>
+            <div class="personagem-atributos">
+              <div><strong>Idade</strong><span>12 anos</span></div>
+              <div><strong>Família</strong><span>Filha de Joel</span></div>
+              <div><strong>Significado</strong><span>O luto que define Joel</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAVID -->
+        <div class="personagem-card">
+          <div class="personagem-foto-wrap">
+            <img loading="lazy" decoding="async" src="images/Part_I_David_infobox.webp" alt="David" class="personagem-foto">
+            <div class="foto-placeholder" hidden><span>D</span></div>
+            <div class="foto-overlay">Antagonista · Colorado</div>
+          </div>
+          <div class="personagem-info">
+            <h3>David</h3>
+            <div class="tags-row">
+              <span class="tag tag-vermelho">Antagonista</span>
+              <span class="tag tag-cinza">Part I</span>
+            </div>
+            <p>Líder de um grupo de sobreviventes no Lakeside Resort que recorre ao canibalismo. Educado, eloquente e profundamente perturbador — David é um dos antagonistas mais memoráveis da franquia.</p>
+            <p>Seu confronto final com Ellie no inverno transforma uma criança em alguém capaz de violência adulta — e sela o vínculo entre ela e Joel.</p>
+            <div class="personagem-atributos">
+              <div><strong>Localização</strong><span>Lakeside Resort, CO</span></div>
+              <div><strong>Grupo</strong><span>Canibais</span></div>
+              <div><strong>Traço</strong><span>Manipulação e violência</span></div>
+            </div>
+          </div>
+        </div>
+
+          </div>
+        </div>
+        <button class="carrossel-btn next" id="personagemNext"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="carrossel-dots" id="personagemDots"></div>
+    </div>
+  </section>
+
+  <!-- ========== INFECTADOS ========== -->
+  <section id="infectados" class="secao">
+    <div class="secao-inner">
+      <h2>Os Infectados</h2>
+      <p class="secao-sub">O fungo <em>Ophiocordyceps</em> transforma humanos em etapas — quanto mais tempo, mais perigoso e menos humano</p>
+
+      <div class="carrossel-wrap">
+        <button class="carrossel-btn prev" id="infectadoPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="carrossel-viewport">
+          <div class="carrossel-track" id="infectadoTrack">
+
+            <!-- RUNNER -->
+            <div class="infectado-card">
+              <div class="infectado-foto-wrap">
+                <img loading="lazy" decoding="async" src="images/runner.jpg" alt="Corredor" class="infectado-foto">
+                <div class="infectado-badge runner-badge">Estágio 1</div>
+              </div>
+              <div class="infectado-corpo">
+                <div class="infectado-header">
+                  <h3>Corredor</h3>
+                  <span class="infectado-tempo">Dias a semanas pós-infecção</span>
+                </div>
+                <p>O estágio inicial da infecção. O fungo ainda não dominou completamente o sistema nervoso, então o hospedeiro ainda enxerga e ouve normalmente. São frenéticos, raivosos e atacam em bando.</p>
+                <div class="infectado-detalhes">
+                  <div class="infectado-detalhe">
+                    <strong>Visão</strong><span>Completa</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Audição</strong><span>Normal</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Fraqueza</strong><span>Fogo e bala</span>
+                  </div>
+                </div>
+                <p class="infectado-dica"><strong>Como sobreviver:</strong> Corra ou ataque à distância. Em grupos são perigosos, mas individualmente são os mais fáceis de eliminar.</p>
+                <div class="perigo-wrap">
+                  <span>Nível de perigo</span>
+                  <div class="perigo-bar"><div class="perigo-fill" style="width:25%; background:#4a9e4a"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STALKER -->
+            <div class="infectado-card">
+              <div class="infectado-foto-wrap">
+                <img loading="lazy" decoding="async" src="images/Stalker_models.webp" alt="Espreitador" class="infectado-foto infectado-foto-stalker">
+                <div class="infectado-badge stalker-badge">Estágio 2</div>
+              </div>
+              <div class="infectado-corpo">
+                <div class="infectado-header">
+                  <h3>Espreitador</h3>
+                  <span class="infectado-tempo">Semanas a meses pós-infecção</span>
+                </div>
+                <p>A fase de transição mais temida. O fungo começa a crescer sobre o rosto e os olhos, mas o Espreitador ainda tem visão parcial. Diferente dos outros, ele <em>se esconde</em> — fica atrás de pilares, portas e sombras esperando o momento certo para atacar.</p>
+                <div class="infectado-detalhes">
+                  <div class="infectado-detalhe">
+                    <strong>Visão</strong><span>Parcial</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Audição</strong><span>Aguçada</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Fraqueza</strong><span>Chamas</span>
+                  </div>
+                </div>
+                <p class="infectado-dica"><strong>Como sobreviver:</strong> Nunca baixe a guarda em ambientes fechados. Fique atento a movimentos nas periferias da visão.</p>
+                <div class="perigo-wrap">
+                  <span>Nível de perigo</span>
+                  <div class="perigo-bar"><div class="perigo-fill" style="width:50%; background:#c8a45a"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CLICKER -->
+            <div class="infectado-card">
+              <div class="infectado-foto-wrap">
+                <img loading="lazy" decoding="async" src="images/Clicker_model_Part_II.webp" alt="Clicker" class="infectado-foto infectado-foto-modelo">
+                <div class="infectado-badge clicker-badge">Estágio 3</div>
+              </div>
+              <div class="infectado-corpo">
+                <div class="infectado-header">
+                  <h3>Clicker</h3>
+                  <span class="infectado-tempo">1 a 2 anos pós-infecção</span>
+                </div>
+                <p>O fungo destruiu completamente os olhos e deformou o crânio. Totalmente cegos, os Clickers desenvolveram <strong>ecolocalização</strong> — emitem cliques agudos e assustadores e "enxergam" pelo eco do som. Um único agarre quebra o pescoço instantaneamente.</p>
+                <div class="infectado-detalhes">
+                  <div class="infectado-detalhe">
+                    <strong>Visão</strong><span>Nenhuma</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Detecção</strong><span>Por som</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Fraqueza</strong><span>Furtividade</span>
+                  </div>
+                </div>
+                <p class="infectado-dica"><strong>Como sobreviver:</strong> Nunca faça barulho perto de um. Ande agachado, ataque furtivamente por trás — ou use uma bomba de fumaça e corra.</p>
+                <div class="perigo-wrap">
+                  <span>Nível de perigo</span>
+                  <div class="perigo-bar"><div class="perigo-fill" style="width:75%; background:#c85a5a"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BLOATER -->
+            <div class="infectado-card">
+              <div class="infectado-foto-wrap">
+                <img loading="lazy" decoding="async" src="images/Bloater_Part_II_model.webp" alt="Baiacu" class="infectado-foto infectado-foto-modelo">
+                <div class="infectado-badge bloater-badge">Estágio 4</div>
+              </div>
+              <div class="infectado-corpo">
+                <div class="infectado-header">
+                  <h3>Baiacu</h3>
+                  <span class="infectado-tempo">Vários anos pós-infecção</span>
+                </div>
+                <p>O estágio final e mais aterrorizante. O fungo consumiu o corpo inteiro, criando uma armadura natural de placas de micélio endurecidas. Praticamente imune a balas convencionais, pode <strong>arrancar sua cabeça com uma mão</strong> e arremessar bolsas de esporos explosivos à distância.</p>
+                <div class="infectado-detalhes">
+                  <div class="infectado-detalhe">
+                    <strong>Armadura</strong><span>Placas de fungo</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Ataque</strong><span>Corpo a corpo + esporos</span>
+                  </div>
+                  <div class="infectado-detalhe">
+                    <strong>Fraqueza</strong><span>Coquetel molotov</span>
+                  </div>
+                </div>
+                <p class="infectado-dica"><strong>Como sobreviver:</strong> Mantenha distância e use coquetéis molotov. Nunca, em hipótese alguma, deixe chegar perto de você.</p>
+                <div class="perigo-wrap">
+                  <span>Nível de perigo</span>
+                  <div class="perigo-bar"><div class="perigo-fill" style="width:100%; background:#7a3a00"></div></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button class="carrossel-btn next" id="infectadoNext"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="carrossel-dots" id="infectadoDots"></div>
+
+    </div>
+  </section>
+
+  <!-- ========== FACÇÕES ========== -->
+  <section id="faccoes" class="secao">
+    <div class="secao-inner">
+      <p class="secao-pre">Os grupos</p>
+      <h2>Facções</h2>
+      <p class="secao-sub">Quando o governo cai, as pessoas se organizam — em sobreviventes, ideólogos e predadores</p>
+
+      <div class="faccoes-grid">
+
+        <div class="faccao-card">
+          <div class="faccao-icone"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">FEDRA</span>
+            <span class="faccao-tag-cinza">Militar</span>
+          </div>
+          <h3>Federal Disaster Response Agency</h3>
+          <p>Os últimos vestígios do governo americano. Administra as Zonas de Quarentena com autoritarismo extremo — toque de recolher, execuções públicas e trabalho forçado em nome da "ordem". Muitos sobreviventes os consideram piores que os infectados.</p>
+          <div class="faccao-base"><strong>Base</strong> Zonas de Quarentena (Boston, Pittsburgh, etc.)</div>
+        </div>
+
+        <div class="faccao-card">
+          <div class="faccao-icone faccao-icone-vermelho"><i class="fa-solid fa-fire"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">Vaga-lumes</span>
+            <span class="faccao-tag-vermelho">Revolucionários</span>
+          </div>
+          <h3>Fireflies</h3>
+          <p>Movimento de resistência liderado por Marlene. Lutam contra a FEDRA e dedicam tudo à busca por uma cura para o Cordyceps. Seu lema — "Quando estiver perdido na escuridão, procure a luz" — vira o símbolo de esperança e ironia trágica da franquia.</p>
+          <div class="faccao-base"><strong>Líder</strong> Marlene · <strong>Base final</strong> Salt Lake City</div>
+        </div>
+
+        <div class="faccao-card">
+          <div class="faccao-icone"><i class="fa-solid fa-skull"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">Caçadores</span>
+            <span class="faccao-tag-cinza">Bandidos</span>
+          </div>
+          <h3>Hunters</h3>
+          <p>Sobreviventes que se tornaram bandidos. Saqueiam, sequestram e matam viajantes nas cidades abandonadas. Não têm ideologia — só sobrevivência através da brutalidade. Joel e Ellie os enfrentam em Pittsburgh, e Joel não esconde: ele já foi um deles.</p>
+          <div class="faccao-base"><strong>Território</strong> Pittsburgh e arredores</div>
+        </div>
+
+        <div class="faccao-card">
+          <div class="faccao-icone faccao-icone-azul"><i class="fa-solid fa-dog"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">WLF</span>
+            <span class="faccao-tag-azul">Milícia</span>
+          </div>
+          <h3>Washington Liberation Front</h3>
+          <p>Milícia organizada de Seattle, formada por ex-soldados que derrubaram a FEDRA local. Disciplinada, bem armada e bem suprida, com cães treinados e patrulhas. Em guerra aberta com os Seraphites. Abby é uma das suas soldados de elite.</p>
+          <div class="faccao-base"><strong>Base</strong> Estádio de Seattle · <strong>Membros</strong> Abby, Owen, Manny</div>
+        </div>
+
+        <div class="faccao-card">
+          <div class="faccao-icone"><i class="fa-solid fa-khanda"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">Seraphites</span>
+            <span class="faccao-tag-cinza">Culto</span>
+          </div>
+          <h3>Scars</h3>
+          <p>Culto religioso fundado pela "Profetisa". Vivem nas florestas e ilhas de Seattle, rejeitam tecnologia moderna e marcam o rosto com cicatrizes ritualísticas. Usam arcos, machetes e silvos para se comunicar em emboscadas. Em guerra eterna com o WLF.</p>
+          <div class="faccao-base"><strong>Base</strong> Ilha em Seattle · <strong>Membros</strong> Yara, Lev</div>
+        </div>
+
+        <div class="faccao-card">
+          <div class="faccao-icone faccao-icone-vermelho"><i class="fa-solid fa-link"></i></div>
+          <div class="faccao-header">
+            <span class="faccao-sigla">Rattlers</span>
+            <span class="faccao-tag-vermelho">Escravagistas</span>
+          </div>
+          <h3>The Rattlers</h3>
+          <p>Grupo brutal que opera em Santa Bárbara, na Califórnia. Capturam sobreviventes e os escravizam, marcando-os como gado. Aparecem no ato final do Part II — talvez a facção mais sombria de toda a franquia.</p>
+          <div class="faccao-base"><strong>Base</strong> Santa Bárbara, CA</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JORNADA ========== -->
+  <section id="jornada" class="secao secao-escura">
+    <div class="secao-inner">
+      <h2>A Jornada</h2>
+      <p class="secao-sub">Dos dois jogos — de Boston até Santa Bárbara</p>
+
+      <div class="jornadas-grid">
+        <div>
+          <h3 class="jornada-titulo">Part I — Boston até Salt Lake City</h3>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Boston, Massachusetts</h3>
+                  <span class="timeline-tag">Zona de Quarentena</span>
+                </div>
+                <p>Onde tudo começa. Joel e Tess vivem como contrabandistas sob controle militar da FEDRA. É aqui que recebem Ellie e a missão que vai mudar tudo.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Bill's Town, Massachusetts</h3>
+                  <span class="timeline-tag">Cidade Armadilhada</span>
+                </div>
+                <p>Um sobrevivente paranoico chamado Bill armadilhou uma cidade inteira. Joel pede ajuda para conseguir um carro e seguir em frente.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Pittsburgh, Pennsylvania</h3>
+                  <span class="timeline-tag">Território Hostil</span>
+                </div>
+                <p>Caçadores dominam a cidade — sobreviventes que matam outros para roubar suprimentos. Joel e Ellie conhecem os irmãos Henry e Sam.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Jackson, Wyoming</h3>
+                  <span class="timeline-tag">Comunidade Segura</span>
+                </div>
+                <p>Tommy, irmão de Joel, construiu uma pequena comunidade com hidroelétrica. Um dos únicos lugares ainda organizados no país.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Salt Lake City, Utah</h3>
+                  <span class="timeline-tag">Destino Final</span>
+                </div>
+                <p>O quartel-general dos Vaga-lumes. É aqui que a jornada termina — e onde Joel toma a decisão mais controversa e emocionante de toda a história.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <h3 class="jornada-titulo">Part II — Jackson até Santa Bárbara</h3>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Jackson, Wyoming</h3>
+                  <span class="timeline-tag">Ponto de Partida</span>
+                </div>
+                <p>Cinco anos após o Part I. Ellie vive em Jackson com a comunidade de Tommy. Um evento traumático a coloca no caminho de uma jornada sem volta.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Estação Eastbrook, Wyoming</h3>
+                  <span class="timeline-tag">O Estopim</span>
+                </div>
+                <p>Uma antiga estação de esqui em meio à nevasca. É aqui que ocorre o evento que muda tudo — o ponto de virada que dá início à busca incansável de Ellie por respostas.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Seattle, Washington</h3>
+                  <span class="timeline-tag">WLF vs. Seraphitas</span>
+                </div>
+                <p>Uma cidade em guerra civil entre o WLF e os Seraphitas. Ellie e Abby (em perspectivas diferentes) navegam por dias de combate brutal e descobertas dolorosas.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Ilha dos Seraphitas</h3>
+                  <span class="timeline-tag">Refúgio Isolado</span>
+                </div>
+                <p>Um grupo quase religioso que rejeita tecnologia e vive numa ilha isolada. Abby chega aqui em uma das partes mais inesperadas e tocantes do jogo.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-box">
+                <div class="timeline-header">
+                  <h3>Santa Bárbara, Califórnia</h3>
+                  <span class="timeline-tag">Confronto Final</span>
+                </div>
+                <p>O destino final de ambas as protagonistas. O confronto que encerra o jogo é um dos mais impactantes da história dos games — e deixa o jogador para refletir.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAPA INTERATIVO ========== -->
+  <section id="mapa" class="secao">
+    <div class="secao-inner">
+      <p class="secao-pre">A rota da sobrevivência</p>
+      <h2>Mapa da Jornada</h2>
+      <p class="secao-sub">Clique nos pontos para ver o que aconteceu em cada lugar</p>
+
+      <div class="mapa-container">
+        <div class="mapa-legenda">
+          <span class="mapa-legenda-item mapa-leg-1"><i class="fa-solid fa-circle"></i> Part I</span>
+          <span class="mapa-legenda-item mapa-leg-2"><i class="fa-solid fa-circle"></i> Part II</span>
+        </div>
+
+        <div class="mapa-wrap">
+          <svg viewBox="0 0 900 560" class="mapa-svg" role="img" aria-label="Mapa estilizado dos EUA com pontos da jornada">
+
+            <!-- Fundo / sombra do mapa -->
+            <defs>
+              <filter id="sombra-mapa">
+                <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#c8a45a" flood-opacity="0.15"/>
+              </filter>
+              <filter id="glow-ponto">
+                <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#c8a45a" flood-opacity="0.8"/>
+              </filter>
+              <filter id="glow-ponto-2">
+                <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#4a6f8c" flood-opacity="0.8"/>
+              </filter>
+            </defs>
+
+            <!-- Silhueta simplificada dos EUA continentais -->
+            <path class="mapa-usa" d="
+              M 120,80
+              L 820,80
+              L 840,100
+              L 850,160
+              L 830,200
+              L 800,220
+              L 790,260
+              L 760,280
+              L 740,320
+              L 720,360
+              L 700,400
+              L 680,430
+              L 640,450
+              L 600,460
+              L 560,470
+              L 520,465
+              L 490,480
+              L 460,490
+              L 430,485
+              L 400,470
+              L 370,460
+              L 340,450
+              L 310,440
+              L 280,430
+              L 240,420
+              L 200,410
+              L 160,390
+              L 130,360
+              L 100,320
+              L 85,280
+              L 80,240
+              L 90,200
+              L 100,160
+              L 110,120
+              Z
+            " filter="url(#sombra-mapa)"/>
+
+            <!-- Linhas de rota Part I -->
+            <polyline class="mapa-rota mapa-rota-1"
+              points="720,145 680,150 640,160 600,175 555,190 510,210 470,230 430,250 390,255"
+              stroke-dasharray="6,4"/>
+
+            <!-- Linhas de rota Part II -->
+            <polyline class="mapa-rota mapa-rota-2"
+              points="430,250 420,220 400,200 380,185 350,175 320,160 295,148"
+              stroke-dasharray="6,4"/>
+            <polyline class="mapa-rota mapa-rota-2"
+              points="295,148 310,170 320,200 315,230 300,260 290,290 285,310 310,350 330,380 340,410"
+              stroke-dasharray="6,4"/>
+
+            <!-- PONTOS PART I -->
+            <!-- Boston -->
+            <g class="mapa-ponto mapa-ponto-1" data-cidade="boston" tabindex="0" role="button" aria-label="Boston">
+              <circle cx="720" cy="145" r="10" filter="url(#glow-ponto)"/>
+              <circle cx="720" cy="145" r="5" class="mapa-ponto-inner"/>
+              <text x="720" y="132" class="mapa-label">Boston</text>
+            </g>
+
+            <!-- Bill's Town -->
+            <g class="mapa-ponto mapa-ponto-1" data-cidade="bills" tabindex="0" role="button" aria-label="Bill's Town">
+              <circle cx="680" cy="150" r="8" filter="url(#glow-ponto)"/>
+              <circle cx="680" cy="150" r="4" class="mapa-ponto-inner"/>
+              <text x="680" y="137" class="mapa-label">Bill's Town</text>
+            </g>
+
+            <!-- Pittsburgh -->
+            <g class="mapa-ponto mapa-ponto-1" data-cidade="pittsburgh" tabindex="0" role="button" aria-label="Pittsburgh">
+              <circle cx="635" cy="162" r="8" filter="url(#glow-ponto)"/>
+              <circle cx="635" cy="162" r="4" class="mapa-ponto-inner"/>
+              <text x="635" y="149" class="mapa-label">Pittsburgh</text>
+            </g>
+
+            <!-- Jackson -->
+            <g class="mapa-ponto mapa-ponto-compartilhado" data-cidade="jackson" tabindex="0" role="button" aria-label="Jackson">
+              <circle cx="430" cy="250" r="11" filter="url(#glow-ponto)"/>
+              <circle cx="430" cy="250" r="5" class="mapa-ponto-inner"/>
+              <text x="430" y="237" class="mapa-label">Jackson</text>
+            </g>
+
+            <!-- Salt Lake City -->
+            <g class="mapa-ponto mapa-ponto-1" data-cidade="saltlake" tabindex="0" role="button" aria-label="Salt Lake City">
+              <circle cx="390" cy="255" r="8" filter="url(#glow-ponto)"/>
+              <circle cx="390" cy="255" r="4" class="mapa-ponto-inner"/>
+              <text x="368" y="243" class="mapa-label">Salt Lake City</text>
+            </g>
+
+            <!-- PONTOS PART II -->
+            <!-- Eastbrook -->
+            <g class="mapa-ponto mapa-ponto-2" data-cidade="eastbrook" tabindex="0" role="button" aria-label="Eastbrook">
+              <circle cx="420" cy="220" r="8" filter="url(#glow-ponto-2)"/>
+              <circle cx="420" cy="220" r="4" class="mapa-ponto-inner-2"/>
+              <text x="430" y="215" class="mapa-label mapa-label-2">Eastbrook</text>
+            </g>
+
+            <!-- Seattle -->
+            <g class="mapa-ponto mapa-ponto-2" data-cidade="seattle" tabindex="0" role="button" aria-label="Seattle">
+              <circle cx="295" cy="148" r="10" filter="url(#glow-ponto-2)"/>
+              <circle cx="295" cy="148" r="5" class="mapa-ponto-inner-2"/>
+              <text x="295" y="135" class="mapa-label mapa-label-2">Seattle</text>
+            </g>
+
+            <!-- Ilha Seraphites -->
+            <g class="mapa-ponto mapa-ponto-2" data-cidade="ilha" tabindex="0" role="button" aria-label="Ilha dos Seraphitas">
+              <circle cx="265" cy="138" r="7" filter="url(#glow-ponto-2)"/>
+              <circle cx="265" cy="138" r="3.5" class="mapa-ponto-inner-2"/>
+              <text x="240" y="125" class="mapa-label mapa-label-2">Ilha</text>
+            </g>
+
+            <!-- Santa Bárbara -->
+            <g class="mapa-ponto mapa-ponto-2" data-cidade="santabarbara" tabindex="0" role="button" aria-label="Santa Bárbara">
+              <circle cx="310" cy="350" r="10" filter="url(#glow-ponto-2)"/>
+              <circle cx="310" cy="350" r="5" class="mapa-ponto-inner-2"/>
+              <text x="320" y="345" class="mapa-label mapa-label-2">Santa Bárbara</text>
+            </g>
+
+          </svg>
+
+          <!-- Tooltip -->
+          <div class="mapa-tooltip" id="mapaTooltip" hidden>
+            <div class="mapa-tooltip-jogo" id="mapaTooltipJogo"></div>
+            <h4 id="mapaTooltipNome"></h4>
+            <p id="mapaTooltipDesc"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== A SÉRIE ========== -->
+  <section id="serie" class="secao secao-escura">
+    <div class="secao-inner">
+      <h2>A Série Completa</h2>
+      <div class="serie-lista">
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2013</span></div>
+          <div class="serie-detalhes">
+            <h3>The Last of Us</h3>
+            <p>O jogo original. Joel e Ellie atravessam os EUA pós-apocalípticos em uma jornada que redefine o que videogames podem ser como forma de arte narrativa.</p>
+            <div class="serie-tags">
+              <span>PS3 · PS4 · PS5 · PC</span>
+              <span class="nota-tag">95/100 no Metacritic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2014</span></div>
+          <div class="serie-detalhes">
+            <h3>Left Behind (DLC)</h3>
+            <p>A história de Ellie antes do jogo principal. Acompanhe sua amizade com Riley e descubra como ela descobriu sua imunidade — em uma das adições mais emotivas da série.</p>
+            <div class="serie-tags">
+              <span>DLC · PS3 · PS4</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2014</span></div>
+          <div class="serie-detalhes">
+            <h3>The Last of Us Remastered</h3>
+            <p>Versão remasterizada para PS4 com gráficos em 1080p/60fps, DLC Left Behind incluído e melhorias técnicas. Apresentou o jogo a uma nova geração de jogadores.</p>
+            <div class="serie-tags">
+              <span>PS4</span>
+              <span class="nota-tag">95/100 no Metacritic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2020</span></div>
+          <div class="serie-detalhes">
+            <h3>The Last of Us Part II</h3>
+            <p>Ellie, agora com 19 anos em Jackson, busca vingança em um mundo ainda mais brutal e moralmente complexo. O jogo mais premiado da história dos games com mais de 300 prêmios de GOTY.</p>
+            <div class="serie-tags">
+              <span>PS4 · PS5 · PC</span>
+              <span class="nota-tag">93/100 no Metacritic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2022</span></div>
+          <div class="serie-detalhes">
+            <h3>The Last of Us Part I</h3>
+            <p>Remake completo do jogo original construído do zero na engine do Part II. Animações faciais refeitas, IA aprimorada, acessibilidade ampliada e visual de geração atual.</p>
+            <div class="serie-tags">
+              <span>PS5 · PC</span>
+              <span class="nota-tag">88/100 no Metacritic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano hbo"><span>HBO</span></div>
+          <div class="serie-detalhes">
+            <h3>Série HBO — Temporada 1 (2023)</h3>
+            <p>Com Pedro Pascal como Joel e Bella Ramsey como Ellie, adaptando o primeiro jogo. Foi a série de estreia mais vista da HBO desde Game of Thrones, conquistando 8 Emmy Awards.</p>
+            <div class="serie-tags">
+              <span>HBO Max · 9 episódios</span>
+              <span class="nota-tag">8 Emmys</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano"><span>2024</span></div>
+          <div class="serie-detalhes">
+            <h3>The Last of Us Part II Remastered</h3>
+            <p>Versão para PS5 e PC com modo roguelike <strong>No Return</strong>, "Lost Levels" comentados pelos desenvolvedores, modo guitarra livre e melhorias gráficas com 4K nativo.</p>
+            <div class="serie-tags">
+              <span>PS5 · PC</span>
+              <span class="nota-tag">No Return Mode</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="serie-item">
+          <div class="serie-ano hbo"><span>HBO</span></div>
+          <div class="serie-detalhes">
+            <h3>Série HBO — Temporada 2 (2025)</h3>
+            <p>Adaptação do Part II com Kaitlyn Dever como Abby e Isabela Merced como Dina. A primeira parte da história de vingança chega às telas, com produção dividida em múltiplas temporadas.</p>
+            <div class="serie-tags">
+              <span>HBO Max · 7 episódios</span>
+              <span class="nota-tag">Em exibição</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRILHA SONORA ========== -->
+  <section id="trilha" class="secao">
+    <div class="secao-inner">
+      <p class="secao-pre">Música & Som</p>
+      <h2>A Trilha Sonora</h2>
+      <p class="secao-sub">Talvez a maior arma narrativa da franquia — um violão melancólico que carrega o peso de um mundo perdido</p>
+
+      <div class="trilha-grid">
+        <div class="trilha-compositor">
+          <div class="trilha-avatar"><i class="fa-solid fa-guitar"></i></div>
+          <h3>Gustavo Santaolalla</h3>
+          <p class="trilha-papel">Compositor · Argentina</p>
+          <p>Vencedor de dois Oscars por <em>Brokeback Mountain</em> e <em>Babel</em>, Santaolalla foi convidado por Neil Druckmann antes mesmo de ele saber tocar videogame. O resultado: uma das trilhas mais reconhecíveis da história dos games, marcada pelo violão de cordas dedilhadas e o instrumento argentino <strong>ronroco</strong>.</p>
+          <p>Sua abordagem minimalista — quase silenciosa em momentos cruciais — virou marca registrada. No Part II, divide a composição com Mac Quayle para os temas mais agressivos relacionados à vingança.</p>
+        </div>
+
+        <div class="trilha-faixas">
+          <h4>Faixas icônicas</h4>
+          <ul>
+            <li>
+              <span class="faixa-num">01</span>
+              <div>
+                <strong>The Last of Us (Main Theme)</strong>
+                <small>O tema principal — três notas que carregam o jogo inteiro</small>
+              </div>
+            </li>
+            <li>
+              <span class="faixa-num">02</span>
+              <div>
+                <strong>The Path</strong>
+                <small>Acompanha os momentos mais contemplativos da jornada</small>
+              </div>
+            </li>
+            <li>
+              <span class="faixa-num">03</span>
+              <div>
+                <strong>All Gone</strong>
+                <small>A faixa de luto. Talvez a mais dolorosa de toda a série</small>
+              </div>
+            </li>
+            <li>
+              <span class="faixa-num">04</span>
+              <div>
+                <strong>Vengeance</strong>
+                <small>Tema do Part II — pesado, distorcido, raivoso</small>
+              </div>
+            </li>
+            <li>
+              <span class="faixa-num">05</span>
+              <div>
+                <strong>Future Days</strong>
+                <small>Cover da Pearl Jam que vira o tema entre Joel e Ellie</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trilha-citacao">
+        <i class="fa-solid fa-quote-left"></i>
+        <p>"Eu não estava tentando criar a trilha de um jogo. Estava tentando criar a alma de um lugar."</p>
+        <small>— Gustavo Santaolalla</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CURIOSIDADES ========== -->
+  <section class="secao">
+    <div class="secao-inner">
+      <h2>Curiosidades</h2>
+      <p class="secao-sub">Fatos que você talvez não saiba sobre o desenvolvimento</p>
+      <div class="curiosidades-grid">
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">01</span>
+          <p>O fungo <em>Cordyceps</em> é real. Na natureza, ele infecta formigas e outros insetos, controlando seu comportamento. Neil Druckmann teve a ideia ao ver um documentário da BBC sobre o assunto.</p>
+        </div>
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">02</span>
+          <p>O jogo levou <strong>4 anos</strong> para ser desenvolvido por uma equipe de ~200 pessoas. O roteiro passou por dezenas de versões completamente diferentes antes de chegar na história final.</p>
+        </div>
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">03</span>
+          <p>A atriz <strong>Ashley Johnson</strong> (voz de Ellie) e o ator <strong>Troy Baker</strong> (Joel) fizeram captura de movimento completa — movimentos, expressões e voz simultâneos — tornando as atuações incrivelmente realistas.</p>
+        </div>
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">04</span>
+          <p>A cena da <strong>girafa no Hospital</strong> é considerada uma das mais bonitas da história dos games. A equipe de desenvolvimento passou semanas estudando e programando o comportamento real dos animais.</p>
+        </div>
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">05</span>
+          <p>No Part II, a atriz <strong>Laura Bailey</strong> recebeu ameaças de morte nas redes sociais por dar voz a Abby. O episódio expôs como o jogo tocou em nervos emocionais profundos dos fãs.</p>
+        </div>
+
+        <div class="curiosidade-card">
+          <span class="curiosidade-num">06</span>
+          <p>O clique dos <strong>Clickers</strong> foi criado combinando sons de golfinho com sons de morcego em laboratório de áudio. O resultado foi tão assustador que a equipe ficou orgulhosa e com medo ao mesmo tempo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EASTER EGGS ========== -->
+  <section id="easter-eggs" class="secao secao-escura">
+    <div class="secao-inner">
+      <p class="secao-pre">Segredos escondidos</p>
+      <h2>Easter Eggs</h2>
+      <p class="secao-sub">Detalhes que a Naughty Dog escondeu para quem presta atenção em cada canto do mundo</p>
+
+      <div class="eggs-grid">
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part I</div>
+          <div class="egg-icone"><i class="fa-solid fa-gamepad"></i></div>
+          <h3>Crash Bandicoot</h3>
+          <p>No quarto de Sarah no prólogo, é possível encontrar um boneco do Crash Bandicoot na prateleira — referência direta a outro clássico da Naughty Dog, criadora de ambos os jogos.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part I</div>
+          <div class="egg-icone"><i class="fa-solid fa-book"></i></div>
+          <h3>The Road de Cormac McCarthy</h3>
+          <p>Em várias partes do jogo aparecem cópias do livro <em>The Road</em> de Cormac McCarthy — uma das maiores inspirações narrativas para o universo de The Last of Us.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part I</div>
+          <div class="egg-icone"><i class="fa-solid fa-music"></i></div>
+          <h3>A música do Bill</h3>
+          <p>Na casa de Bill, é possível encontrar um toca-discos com <em>Alone and Forsaken</em> de Hank Williams — a mesma música que toca enquanto Bill escreve sua carta para Frank.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part I</div>
+          <div class="egg-icone"><i class="fa-solid fa-newspaper"></i></div>
+          <h3>Jornal de Sarah</h3>
+          <p>O jornal que Sarah lê no prólogo tem headlines reais baseadas em eventos de 2013. A data da edição bate exatamente com os dias antes do surto começar na ficção.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part II</div>
+          <div class="egg-icone"><i class="fa-solid fa-guitar"></i></div>
+          <h3>Joel toca Future Days</h3>
+          <p>No início do Part II, Joel toca <em>Future Days</em> da Pearl Jam para Ellie. A música foi escolhida pessoalmente por Neil Druckmann como o tema emocional central do relacionamento entre os dois.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part II</div>
+          <div class="egg-icone"><i class="fa-solid fa-paw"></i></div>
+          <h3>O cachorro que você matou</h3>
+          <p>No Part II, cada cachorro do WLF tem um nome visível na coleira. A Naughty Dog fez isso propositalmente — pra você sentir culpa toda vez que matar um. É devastador.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part II</div>
+          <div class="egg-icone"><i class="fa-solid fa-map"></i></div>
+          <h3>Mapa do Part I na parede</h3>
+          <p>Em Jackson, no Part II, é possível encontrar um mapa rabiscado na parede que traça exatamente a rota que Joel e Ellie percorreram no primeiro jogo — de Boston até Salt Lake City.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part II</div>
+          <div class="egg-icone"><i class="fa-solid fa-film"></i></div>
+          <h3>Poster de Comme des bêtes</h3>
+          <p>Num cinema abandonado de Seattle, há um poster do filme <em>Comme des bêtes</em> (The Secret Life of Pets) — um contraste absurdo e propositalmente irônico com o horror do mundo ao redor.</p>
+        </div>
+
+        <div class="egg-card">
+          <div class="egg-jogo">Part II</div>
+          <div class="egg-icone"><i class="fa-solid fa-hand"></i></div>
+          <h3>A tatuagem de Ellie</h3>
+          <p>A tatuagem de Ellie no braço esquerdo cobre exatamente o local onde ela foi mordida no Left Behind — um detalhe visual que conecta os dois jogos de forma silenciosa e poderosa.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALERIA DE FÃS ========== -->
+  <section id="galeria" class="secao">
+    <div class="secao-inner">
+      <p class="secao-pre">Comunidade</p>
+      <h2>Galeria de Fãs</h2>
+      <p class="secao-sub">Compartilhe seus momentos favoritos — screenshots, cosplays, fan arts, coleções</p>
+
+      <div class="galeria-upload-area" id="galeriaUpload">
+        <i class="fa-solid fa-image"></i>
+        <p>Clique ou arraste suas fotos aqui</p>
+        <small>JPG, PNG, WEBP — as fotos ficam salvas no seu navegador</small>
+        <input type="file" id="galeriaInput" accept="image/*" multiple hidden>
+        <button class="btn-galeria-upload" id="btnGaleriaUpload">
+          <i class="fa-solid fa-plus"></i> Adicionar Fotos
+        </button>
+      </div>
+
+      <div class="galeria-grid" id="galeriaGrid"></div>
+
+      <div class="galeria-vazia" id="galeriaVazia">
+        <i class="fa-solid fa-camera-retro"></i>
+        <p>Nenhuma foto ainda — seja o primeiro a compartilhar!</p>
+      </div>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar foto" hidden>
+        <button class="lightbox-fechar" id="lightboxFechar" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="lightbox-img-wrap">
+          <img src="" alt="" id="lightboxImg">
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Próxima"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="lightbox-info">
+          <span id="lightboxContador"></span>
+          <button class="lightbox-remover" id="lightboxRemover"><i class="fa-solid fa-trash"></i> Remover</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUIZ ========== -->
+  <section id="quiz" class="secao secao-escura">
+    <div class="secao-inner">
+      <p class="secao-pre">Descubra seu personagem</p>
+      <h2>Qual personagem você seria?</h2>
+      <p class="secao-sub">Responda 6 perguntas e descubra com qual sobrevivente do universo TLOU você mais se identifica</p>
+
+      <div class="quiz-wrap" id="quizWrap">
+
+        <div class="quiz-progresso-wrap">
+          <div class="quiz-progresso-barra">
+            <div class="quiz-progresso-fill" id="quizProgressoFill"></div>
+          </div>
+          <span class="quiz-progresso-texto" id="quizProgressoTexto">Pergunta 1 de 6</span>
+        </div>
+
+        <div class="quiz-perguntas" id="quizPerguntas">
+
+          <!-- P1 -->
+          <div class="quiz-pergunta ativa" data-pergunta="0">
+            <h3>Uma ameaça se aproxima. Qual é a sua reação instintiva?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">Ficar quieto e calcular — só ataco se não tiver saída</button>
+              <button class="quiz-opcao" data-valor="ellie">Improviso no momento, confio no meu instinto</button>
+              <button class="quiz-opcao" data-valor="abby">Enfrento de frente — sou mais forte do que pareço</button>
+              <button class="quiz-opcao" data-valor="tommy">Protejo quem está comigo antes de pensar em mim</button>
+            </div>
+          </div>
+
+          <!-- P2 -->
+          <div class="quiz-pergunta" data-pergunta="1">
+            <h3>O que você mais valoriza em uma pessoa?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">Lealdade acima de tudo — quem fica do meu lado é quem importa</button>
+              <button class="quiz-opcao" data-valor="ellie">Honestidade, mesmo que doa</button>
+              <button class="quiz-opcao" data-valor="abby">Determinação — pessoas que não desistem do que acreditam</button>
+              <button class="quiz-opcao" data-valor="dina">Humor e leveza — a vida já é pesada o suficiente</button>
+            </div>
+          </div>
+
+          <!-- P3 -->
+          <div class="quiz-pergunta" data-pergunta="2">
+            <h3>Como você lida com a perda de alguém importante?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">Fecho em mim mesmo e sigo em frente — sentir dói demais</button>
+              <button class="quiz-opcao" data-valor="ellie">Carrego comigo e deixo me transformar</button>
+              <button class="quiz-opcao" data-valor="abby">Busco um propósito — transformo a dor em ação</button>
+              <button class="quiz-opcao" data-valor="tommy">Apoio as pessoas ao redor e deixo a comunidade me segurar</button>
+            </div>
+          </div>
+
+          <!-- P4 -->
+          <div class="quiz-pergunta" data-pergunta="3">
+            <h3>Qual seria sua função num grupo de sobreviventes?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">O estrategista — planejo, calculo riscos, tomo decisões difíceis</button>
+              <button class="quiz-opcao" data-valor="ellie">O explorador — descubro rotas, improviso soluções</button>
+              <button class="quiz-opcao" data-valor="abby">O combatente — proteção física do grupo</button>
+              <button class="quiz-opcao" data-valor="dina">O moral — mantenho o grupo unido e esperançoso</button>
+            </div>
+          </div>
+
+          <!-- P5 -->
+          <div class="quiz-pergunta" data-pergunta="4">
+            <h3>Você encontra suprimentos suficientes só para metade do grupo. O que faz?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">Priorizo quem é mais essencial para a sobrevivência do grupo</button>
+              <button class="quiz-opcao" data-valor="ellie">Divido igualmente — não consigo escolher</button>
+              <button class="quiz-opcao" data-valor="abby">Dou para os mais fracos — posso aguentar mais</button>
+              <button class="quiz-opcao" data-valor="tommy">Saio para buscar mais antes de tomar qualquer decisão</button>
+            </div>
+          </div>
+
+          <!-- P6 -->
+          <div class="quiz-pergunta" data-pergunta="5">
+            <h3>O que te manteria vivo nesse mundo?</h3>
+            <div class="quiz-opcoes">
+              <button class="quiz-opcao" data-valor="joel">Uma razão específica — uma pessoa que precisa de mim</button>
+              <button class="quiz-opcao" data-valor="ellie">Teimosia pura — não consigo simplesmente desistir</button>
+              <button class="quiz-opcao" data-valor="abby">Um objetivo claro — enquanto tenho uma missão, sigo em frente</button>
+              <button class="quiz-opcao" data-valor="dina">As pessoas — não sobrevivo bem sozinho</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-resultado" id="quizResultado" hidden>
+          <div class="resultado-icone" id="resultadoIcone"></div>
+          <h3 id="resultadoNome"></h3>
+          <p class="resultado-papel" id="resultadoPapel"></p>
+          <p class="resultado-desc" id="resultadoDesc"></p>
+          <button class="btn-quiz-reiniciar" id="btnQuizReiniciar">
+            <i class="fa-solid fa-rotate-left"></i> Tentar novamente
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RODAPÉ ========== -->
+  <footer>
+    <div class="footer-content">
+      <p class="footer-logo"><i class="fa-solid fa-biohazard"></i> THE LAST OF US <i class="fa-solid fa-biohazard"></i></p>
+      <p>Fan site não oficial criado por <strong>Vinny</strong></p>
+      <p class="footer-small">
+        Feito com HTML, CSS e JavaScript puro ·
+        Todos os direitos do jogo pertencem à Naughty Dog e Sony Interactive Entertainment
+      </p>
+    </div>
+  </footer>
+
+  <button class="btn-topo" id="btnTopo" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script src="script.js"></script>
+</body>
+</html>
